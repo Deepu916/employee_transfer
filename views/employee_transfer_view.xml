@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_transfer_form_view" model="ir.ui.view">
+        <field name="name">employee.transfer.form.view</field>
+        <field name="model">employee.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="action_submit" type="object"
+                            class="btn-primary" string="Submit"
+                            invisible="state in ['requested','approved','rejected']"
+                            groups="employee_transfer.employee_group"/>
+
+                    <button name="action_approve" type="object"
+                            class="btn-primary" string="Approve"
+                            invisible="state in ['approved','rejected']"
+                            groups="employee_transfer.admin_group"/>
+
+                    <button name="action_reject" type="object"
+                            class="btn-primary" string="Reject"
+                            invisible="state in ['approved','rejected']"
+                            groups="employee_transfer.admin_group"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="employee_id" readonly="state in ['requested','approved']"/>
+                        <field name="company_id" options="{'no_create':True,'no_create_edit':True}" readonly="state in ['requested','approved']"/>
+                        <field name="transfer_date" readonly="state in ['requested','approved']"/>
+                        <field name="new_company_id" options="{'no_create':True,'no_create_edit':True}" domain="[('id','!=',company_id)]" readonly="state in ['requested','approved']"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="employee_transfer_list_view" model="ir.ui.view">
+        <field name="name">employee.transfer.list.view</field>
+        <field name="model">employee.transfer</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="state == 'rejected'" decoration-success ="state == 'approved'" decoration-warning ="state == 'requested'">
+                <field name="employee_id" string="Employee"/>
+                 <field name="company_id" string="Previous Company"/>
+                 <field name="new_company_id" string="New Company"/>
+                 <field name="state" string="State"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="employee_transfer_action" model="ir.actions.act_window">
+        <field name="name">Employee Transfer</field>
+        <field name="res_model">employee.transfer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

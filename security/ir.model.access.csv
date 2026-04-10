@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_employee_transfer,employee_transfer,model_employee_transfer,employee_transfer.employee_group,1,1,1,0
+access_employee_transfer_admin,employee_transfer_admin,model_employee_transfer,employee_transfer.admin_group,1,1,1,1

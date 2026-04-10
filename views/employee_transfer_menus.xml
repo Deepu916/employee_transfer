@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem  id="employee_transfer_root"
+               name="Employee Transfer"/>
+
+    <menuitem  id="employee_transfer_menu"
+               name="Employee Transfer"
+               parent="employee_transfer_root"
+               action="employee_transfer_action"/>
+</odoo>
